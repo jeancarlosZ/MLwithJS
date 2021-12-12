@@ -13,7 +13,7 @@ class LogisticRegression {
   }
 
   gradientDescent(features, labels) {
-    const currentGuesses = features.matMul(this.weights);
+    const currentGuesses = features.matMul(this.weights).sigmoid();
     const differences = currentGuesses.sub(labels);
 
     const slopes = features.transpose().matMul(differences).div(features.shape[0]);
@@ -40,7 +40,7 @@ class LogisticRegression {
   }
 
   predict(observations) {
-    return this.processFeatures(observations).matMul(this.weights);
+    return this.processFeatures(observations).matMul(this.weights).sigmoid();
   }
 
   test(testFeatures, testLabels) {
